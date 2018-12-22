@@ -2,16 +2,6 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
-
-  <!-- PACE Progress Bar START -->
-  
-    <script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
-    <link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
-  
-  
-
-  <!-- PACE Progress Bar START -->
-
   
   <title>learn_sql检索记录 | Ineazy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -36,140 +26,143 @@
   
     <link rel="alternate" href="/atom.xml" title="Ineazy" type="application/atom+xml">
   
-  <link rel="icon" href="/css/images/favicon.ico">
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
   
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
   <style type="text/css">
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
-    
-  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
   <link rel="stylesheet" href="/css/style.css">
 
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
 
   <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/hiero.css">
-  <link rel="stylesheet" href="/css/glyphs.css">
+  <link rel="stylesheet" href="/css/bootstrap.css">
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css">
+  
+
+  
+  
   
     <link rel="stylesheet" href="/css/vdonate.css">
   
 
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="/css/my.css">
-  <!-- Google Adsense -->
-  
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-0123456789ABCDEF",
-          enable_page_level_ads: true
-      });
-  </script>
-  
 </head>
 </html>
-<script>
-var themeMenus = {};
-
-  themeMenus["/"] = "Home"; 
-
-  themeMenus["/archives"] = "Archives"; 
-
-  themeMenus["/categories"] = "Categories"; 
-
-  themeMenus["/tags"] = "Tags"; 
-
-  themeMenus["/about"] = "About"; 
-
-</script>
 
 
   <body data-spy="scroll" data-target="#toc" data-offset="50">
 
 
-  <header id="allheader" class="site-header" role="banner">
-  <div class="clearfix container">
-      <div class="site-branding">
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
 
-          <h1 class="site-title">
-            
-              <a href="/" title="Ineazy" rel="home"> Ineazy </a>
-            
-          </h1>
-
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
           
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
             
-          <nav id="main-navigation" class="main-navigation" role="navigation">
-            <a class="nav-open">Menu</a>
-            <a class="nav-close">Close</a>
-            <div class="clearfix sf-menu">
+              <a class="brand" style="
+                 margin-top: 0px;" href="#" data-toggle="modal" data-target="#myModal">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
 
-              <ul id="main-nav" class="nmenu sf-js-enabled">
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">Categories</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
-                    
-              </ul>
-            </div>
-          </nav>
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
 
-
+</div></li>
+            </ul></div>
+          </div>
+                
       </div>
-  </div>
+    </div>
+
 </header>
 
 
-  <div id="originBgDiv" style="background: #fff; width: 100%;">
 
-      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
-        <img id="originBg" width="100%" alt="" src="">
-      </div>
-
-  </div>
-
-  <script>
-  function setAboutIMG(){
-      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
-      var random = Math.floor((Math.random() * imgUrls.length ));
-      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
-        document.getElementById("originBg").src=imgUrls[random];
-      } else {
-        document.getElementById("originBg").src='/' + imgUrls[random];
-      }
-  }
-  bgDiv=document.getElementById("originBgDiv");
-  if(location.pathname.match('about')){
-    setAboutIMG();
-    bgDiv.style.display='block';
-  }else{
-    bgDiv.style.display='none';
-  }
-  </script>
-
-
-
-  <div id="container">
-    <div id="wrap">
+      
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-Learn-SQL检索记录" style="width: 66%; float:left;" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+          <section id="main" style="float:none;"><article id="post-Learn-SQL检索记录" style="width: 75%; float:left;" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
     
     
       <header class="article-header">
@@ -184,14 +177,19 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="/2018/12/22/Learn-SQL检索记录/" class="article-date">
-	  <time datetime="2018-12-22T05:55:25.000Z" itemprop="datePublished">December 22, 2018</time>
+	<a href="/2018/12/22/Learn-SQL检索记录/" class="article-date">
+	  <time datetime="2018-12-22T05:55:25.000Z" itemprop="datePublished">2018-12-22</time>
 	</a>
 
       
+      
+	<a class="article-views">
 	<span id="busuanzi_container_page_pv">
-	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		PV:<span id="busuanzi_value_page_pv"></span>
 	</span>
+	</a>
+
+      
 
     </div>
     <div class="article-entry" itemprop="articleBody">
@@ -284,12 +282,7 @@ var themeMenus = {};
 
       
     </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sql/">-Sql</a></li></ul>
-
+    <footer class="article-footer">
       
         <div id="donation_div"></div>
 
@@ -304,7 +297,26 @@ var a = new Donate({
 });
 </script>
       
-            
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>Loong
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2018/12/22/Learn-SQL检索记录/" target="_blank" title="Learn_SQL检索记录">http://blog.ineazy.com/2018/12/22/Learn-SQL检索记录/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+</div></div>
+      
       
         
 	<div id="comment">
@@ -329,7 +341,10 @@ var a = new Donate({
 	</div>
 
 
+
       
+      
+
     </footer>
   </div>
   
@@ -349,33 +364,36 @@ var a = new Donate({
 
 <!-- Table of Contents -->
 
-  <aside id="sidebar">
-    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-检索所有的行和列"><span class="nav-number">1.</span> <span class="nav-text">1.1 检索所有的行和列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-筛选行"><span class="nav-number">2.</span> <span class="nav-text">1.2 筛选行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-查找满足多个查询条件的行"><span class="nav-number">3.</span> <span class="nav-text">1.3 查找满足多个查询条件的行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-筛选列"><span class="nav-number">4.</span> <span class="nav-text">1.4 筛选列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-创建有意义的列名"><span class="nav-number">5.</span> <span class="nav-text">1.5 创建有意义的列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-在WHERE子句中引用别名列"><span class="nav-number">6.</span> <span class="nav-text">1.6 在WHERE子句中引用别名列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-串联多列的值"><span class="nav-number">7.</span> <span class="nav-text">1.7 串联多列的值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DB2、Oracle和PostgreSQL"><span class="nav-number">7.1.</span> <span class="nav-text">DB2、Oracle和PostgreSQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL"><span class="nav-number">7.2.</span> <span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-Server"><span class="nav-number">7.3.</span> <span class="nav-text">SQL Server</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-在SELECT语句里使用条件逻辑"><span class="nav-number">8.</span> <span class="nav-text">1.8 在SELECT语句里使用条件逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-限定返回行数"><span class="nav-number">9.</span> <span class="nav-text">1.9 限定返回行数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DB2"><span class="nav-number">9.1.</span> <span class="nav-text">DB2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL-和PostgreSQL"><span class="nav-number">9.2.</span> <span class="nav-text">MySQL 和PostgreSQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Oracle"><span class="nav-number">9.3.</span> <span class="nav-text">Oracle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-Server-1"><span class="nav-number">9.4.</span> <span class="nav-text">SQL Server</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-随机返回若干行记录"><span class="nav-number">10.</span> <span class="nav-text">1.10 随机返回若干行记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DB2-1"><span class="nav-number">10.1.</span> <span class="nav-text">DB2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL-1"><span class="nav-number">10.2.</span> <span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PostgreSQL"><span class="nav-number">10.3.</span> <span class="nav-text">PostgreSQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Oracle-1"><span class="nav-number">10.4.</span> <span class="nav-text">Oracle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQLServer"><span class="nav-number">10.5.</span> <span class="nav-text">SQLServer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-11-查找Null值"><span class="nav-number">11.</span> <span class="nav-text">1.11 查找Null值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-12-把NULL值转换为实际值"><span class="nav-number">12.</span> <span class="nav-text">1.12 把NULL值转换为实际值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-13-查找匹配项"><span class="nav-number">13.</span> <span class="nav-text">1.13 查找匹配项</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-检索所有的行和列"><span class="nav-number">1.</span> <span class="nav-text">1.1 检索所有的行和列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-筛选行"><span class="nav-number">2.</span> <span class="nav-text">1.2 筛选行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-查找满足多个查询条件的行"><span class="nav-number">3.</span> <span class="nav-text">1.3 查找满足多个查询条件的行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-筛选列"><span class="nav-number">4.</span> <span class="nav-text">1.4 筛选列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-创建有意义的列名"><span class="nav-number">5.</span> <span class="nav-text">1.5 创建有意义的列名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-在WHERE子句中引用别名列"><span class="nav-number">6.</span> <span class="nav-text">1.6 在WHERE子句中引用别名列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-串联多列的值"><span class="nav-number">7.</span> <span class="nav-text">1.7 串联多列的值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DB2、Oracle和PostgreSQL"><span class="nav-number">7.1.</span> <span class="nav-text">DB2、Oracle和PostgreSQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL"><span class="nav-number">7.2.</span> <span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-Server"><span class="nav-number">7.3.</span> <span class="nav-text">SQL Server</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-在SELECT语句里使用条件逻辑"><span class="nav-number">8.</span> <span class="nav-text">1.8 在SELECT语句里使用条件逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-限定返回行数"><span class="nav-number">9.</span> <span class="nav-text">1.9 限定返回行数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DB2"><span class="nav-number">9.1.</span> <span class="nav-text">DB2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL-和PostgreSQL"><span class="nav-number">9.2.</span> <span class="nav-text">MySQL 和PostgreSQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Oracle"><span class="nav-number">9.3.</span> <span class="nav-text">Oracle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-Server-1"><span class="nav-number">9.4.</span> <span class="nav-text">SQL Server</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-随机返回若干行记录"><span class="nav-number">10.</span> <span class="nav-text">1.10 随机返回若干行记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DB2-1"><span class="nav-number">10.1.</span> <span class="nav-text">DB2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL-1"><span class="nav-number">10.2.</span> <span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PostgreSQL"><span class="nav-number">10.3.</span> <span class="nav-text">PostgreSQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Oracle-1"><span class="nav-number">10.4.</span> <span class="nav-text">Oracle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQLServer"><span class="nav-number">10.5.</span> <span class="nav-text">SQLServer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-11-查找Null值"><span class="nav-number">11.</span> <span class="nav-text">1.11 查找Null值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-12-把NULL值转换为实际值"><span class="nav-number">12.</span> <span class="nav-text">1.12 把NULL值转换为实际值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-13-查找匹配项"><span class="nav-number">13.</span> <span class="nav-text">1.13 查找匹配项</span></a></li></ol>
     
     </div>
   </aside>
+
 </section>
         
       </div>
-      <footer id="footer" class="site-footer">
+      
+      <footer id="footer">
   
 
-  <div class="clearfix container">
-      <div class="site-info">
-	      &copy; 2018 Ineazy All Rights Reserved.
-          
-            <span id="busuanzi_container_site_uv">
-              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
-              本站总访问量<span id="busuanzi_value_site_pv"></span>次
-            </span>
-          
-      </div>
-      <div class="site-credit">
-        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
-      </div>
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2018 Ineazy All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
   </div>
 </footer>
 
@@ -383,13 +401,17 @@ var a = new Donate({
 <!-- min height -->
 
 <script>
+    var wrapdiv = document.getElementById("wrap");
     var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
 
-    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
 </script>
-
-<!-- Custome JS -->
-<script src="/js/my.js"></script>
     </div>
     <!-- <nav id="mobile-nav">
   
@@ -434,18 +456,20 @@ var a = new Donate({
     });
 </script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
 
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 <script src="/js/scripts.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="/js/main.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
 
 
 
@@ -453,13 +477,14 @@ var a = new Donate({
 
 
 
-  <div style="display: none;">
+
+	<div style="display: none;">
     <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
   </div>
 
 
 
-	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
 	</script>
 
 
@@ -469,7 +494,68 @@ var a = new Donate({
 
   </div>
 
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Ineazy
+          </div>
+          <div class="panel-body">
+            Copyright © 2018 Loong All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
   <a id="rocket" href="#top" class=""></a>
-  <script type="text/javascript" src="/js/totop.js" async=""></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
 </html>
