@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>sqlserver之同时导入多个txt&amp;csv文件 | Ineazy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Sql">
+  
+  
+  
+  
+  <meta name="description" content="BULK语句基础BULK有很多参数，但是常用的只有几个，下面简单介绍一下1234567bulk insert [DatabaseName].[dbo].[table] from &apos;C:\data.txt&apos;   with(      FIRSTROW =1, --指定要加载的第一行的行号。默认值是指定数据文件中的第一行      CODEPAGE=&apos;&apos;936&apos;&apos;, --数据库中的编码类型   FIE">
+<meta name="keywords" content="Sql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sqlserver之同时导入多个txt&amp;csv文件">
+<meta property="og:url" content="http://blog.ineazy.com/2018/12/26/Sqlserver之同时导入多个txt-csv文件/index.html">
+<meta property="og:site_name" content="Ineazy">
+<meta property="og:description" content="BULK语句基础BULK有很多参数，但是常用的只有几个，下面简单介绍一下1234567bulk insert [DatabaseName].[dbo].[table] from &apos;C:\data.txt&apos;   with(      FIRSTROW =1, --指定要加载的第一行的行号。默认值是指定数据文件中的第一行      CODEPAGE=&apos;&apos;936&apos;&apos;, --数据库中的编码类型   FIE">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-26T14:47:00.730Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sqlserver之同时导入多个txt&amp;csv文件">
+<meta name="twitter:description" content="BULK语句基础BULK有很多参数，但是常用的只有几个，下面简单介绍一下1234567bulk insert [DatabaseName].[dbo].[table] from &apos;C:\data.txt&apos;   with(      FIRSTROW =1, --指定要加载的第一行的行号。默认值是指定数据文件中的第一行      CODEPAGE=&apos;&apos;936&apos;&apos;, --数据库中的编码类型   FIE">
+  
+    <link rel="alternate" href="/atom.xml" title="Ineazy" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css">
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css">
+  
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;" href="#" data-toggle="modal" data-target="#myModal">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </ul></div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Sqlserver之同时导入多个txt-csv文件" style="width: 75%; float:left;" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      Sqlserver之同时导入多个txt&amp;csv文件
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/12/26/Sqlserver之同时导入多个txt-csv文件/" class="article-date">
+	  <time datetime="2018-12-26T14:45:29.000Z" itemprop="datePublished">2018-12-26</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Sql/">Sql</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="BULK语句基础"><a href="#BULK语句基础" class="headerlink" title="BULK语句基础"></a>BULK语句基础</h1><p>BULK有很多参数，但是常用的只有几个，下面简单介绍一下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bulk <span class="keyword">insert</span> [DatabaseName].[dbo].[<span class="keyword">table</span>] <span class="keyword">from</span> <span class="string">'C:\data.txt'</span>  </span><br><span class="line"> <span class="keyword">with</span>(   </span><br><span class="line">   FIRSTROW =<span class="number">1</span>, <span class="comment">--指定要加载的第一行的行号。默认值是指定数据文件中的第一行   </span></span><br><span class="line">   CODEPAGE=<span class="string">''</span><span class="number">936</span><span class="string">''</span>, <span class="comment">--数据库中的编码类型</span></span><br><span class="line">   FIELDTERMINATOR=<span class="string">''</span>,<span class="string">''</span>,   <span class="comment">--分隔符</span></span><br><span class="line">   ROWTERMINATOR=<span class="string">'/n'</span>  <span class="comment">--换行符 </span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>代码行中的命名规则</strong><br><em>下面代码均使用该命名规则！！！</em></p>
+<blockquote>
+<p><strong>[DatabaseName].[dbo].[table]</strong> 指的是某个数据库中的表的名字<br><strong>C:\</strong>  指的是文件所在路径,<strong>例：C:\Program Files\</strong>   指的是在C盘Program Files文件夹里的文件<br><strong>data.txt</strong> 指的是所需导入文件的名称</p>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>FIRSTROW 属性</strong><br>指定要加载的第一行的行号。默认值是指定数据文件中的第一行。FIRSTROW 从 1 开始。<br><strong>注意：</strong>FIRSTROW 属性不可用于跳过列标题。 BULK INSERT 语句不支持  跳过标题。 跳过行时， SQL Server 数据库引擎只考虑字段终止符，而不会对所跳过行的字段中的数据进行验证。</li>
+<li><strong>CODEPAGE属性</strong><br>是数据库的编码类型。<strong>若导入数据库的中文数据是乱码，往往与这个有关！！！</strong><br><strong>常用编码类型：</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">编码</th>
+<th style="text-align:center">编码含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">936</td>
+<td style="text-align:center">简体中文GBK</td>
+</tr>
+<tr>
+<td style="text-align:center">65001</td>
+<td style="text-align:center">UFT-8</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>FIELDTERMINATOR属性</strong><br>标识分隔内容的符号。一般csv的分隔符是“<strong>，</strong>”，txt的话可能是空格或者其他符符号比如“ <strong>|</strong> ”。</li>
+<li><strong>ROWTERMINATOR属性</strong><br>标识分隔行的符号 ，即换行符<br><strong>常见换行符：</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">换行符</th>
+<th style="text-align:center">含义</th>
+<th style="text-align:center">常见显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0x0D</td>
+<td style="text-align:center">指的是“回车”</td>
+<td style="text-align:center">\r</td>
+</tr>
+<tr>
+<td style="text-align:center">0x0A</td>
+<td style="text-align:center">指的是“换行”</td>
+<td style="text-align:center">\n</td>
+</tr>
+<tr>
+<td style="text-align:center">0x0D + 0x0A</td>
+<td style="text-align:center">回车换行</td>
+<td style="text-align:center">\r\n</td>
+</tr>
+<tr>
+<td style="text-align:center">char(13)</td>
+<td style="text-align:center">指的是“回车”</td>
+<td style="text-align:center">\r</td>
+</tr>
+<tr>
+<td style="text-align:center">char(10)</td>
+<td style="text-align:center">指的是“换行”</td>
+<td style="text-align:center">\n</td>
+</tr>
+</tbody>
+</table>
+<p>BULK语法中全部参数如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">BULK <span class="keyword">INSERT</span>    </span><br><span class="line">   [ database_name . [ schema_name ] . | schema_name . ] [ table_name | view_name ]    </span><br><span class="line">      <span class="keyword">FROM</span> <span class="string">'data_file'</span>    </span><br><span class="line">     [ <span class="keyword">WITH</span>    </span><br><span class="line">        (    </span><br><span class="line">   [ [ , ] BATCHSIZE = batch_size ]    <span class="comment">--BATCHSIZE指令来设置在单个事务中可以插入到表中的记录的数量   </span></span><br><span class="line">   [ [ , ] CHECK_CONSTRAINTS ]     <span class="comment">--指定在大容量导入操作期间，必须检查所有对目标表或视图的约束。若没有 CHECK_CONSTRAINTS 选项，则所有 CHECK 和 FOREIGN KEY 约束都将被忽略，并且在此操作之后表的约束将标记为不可信。   </span></span><br><span class="line">   [ [ , ] CODEPAGE = &#123; <span class="string">'ACP'</span> | <span class="string">'OEM'</span> | <span class="string">'RAW'</span> | <span class="string">'code_page'</span> &#125; ]  <span class="comment">--指定该数据文件中数据的代码页   </span></span><br><span class="line">   [ [ , ] DATAFILETYPE =    </span><br><span class="line">      &#123; <span class="string">'char'</span> | <span class="string">'native'</span>| <span class="string">'widechar'</span> | <span class="string">'widenative'</span> &#125; ]  <span class="comment">--指定 BULK INSERT 使用指定的数据文件类型值执行导入操作。   </span></span><br><span class="line">   [ [ , ] FIELDTERMINATOR = <span class="string">'field_terminator'</span> ]  <span class="comment">--标识分隔内容的符号   </span></span><br><span class="line">   [ [ , ] FIRSTROW = first_row ]    <span class="comment">--指定要加载的第一行的行号。默认值是指定数据文件中的第一行   </span></span><br><span class="line">   [ [ , ] FIRE_TRIGGERS ]     <span class="comment">--是否启动触发器   </span></span><br><span class="line">   [ [ , ] FORMATFILE = <span class="string">'format_file_path'</span> ]    </span><br><span class="line">   [ [ , ] KEEPIDENTITY ]   <span class="comment">--指定导入数据文件中的标识值用于标识列   </span></span><br><span class="line">   [ [ , ] KEEPNULLS ]    <span class="comment">--指定在大容量导入操作期间空列应保留一个空值，而不插入用于列的任何默认值   </span></span><br><span class="line">   [ [ , ] KILOBYTES_PER_BATCH = kilobytes_per_batch ]    </span><br><span class="line">   [ [ , ] LASTROW = last_row ]   <span class="comment">--指定要加载的最后一行的行号   </span></span><br><span class="line">   [ [ , ] MAXERRORS = max_errors ]   <span class="comment">--指定允许在数据中出现的最多语法错误数，超过该数量后将取消大容量导入操作。   </span></span><br><span class="line">   [ [ , ] <span class="keyword">ORDER</span> ( &#123; <span class="keyword">column</span> [ <span class="keyword">ASC</span> | <span class="keyword">DESC</span> ] &#125; [ ,...n ] ) ]  <span class="comment">--指定数据文件中的数据如何排序   </span></span><br><span class="line">   [ [ , ] ROWS_PER_BATCH = rows_per_batch ]    </span><br><span class="line">   [ [ , ] ROWTERMINATOR = <span class="string">'row_terminator'</span> ]   <span class="comment">--标识分隔行的符号   </span></span><br><span class="line">   [ [ , ] TABLOCK ]     <span class="comment">--指定为大容量导入操作持续时间获取一个表级锁   </span></span><br><span class="line">   [ [ , ] ERRORFILE = <span class="string">'file_name'</span> ]   <span class="comment">--指定用于收集格式有误且不能转换为 OLE DB 行集的行的文件。   </span></span><br><span class="line">        )]</span><br></pre></td></tr></table></figure></p>
+<p>ps.根本看不下去，具体使用方法点击下方的链接参考官方文档。</p>
+<blockquote>
+<p><strong><a href="https://docs.microsoft.com/zh-cn/sql/t-sql/statements/bulk-insert-transact-sql?view=sql-server-2017" target="_blank" rel="noopener">更多细节点击链接查看微软官方文档</a></strong></p>
+</blockquote>
+<h1 id="现在我们来看如何导入表"><a href="#现在我们来看如何导入表" class="headerlink" title="现在我们来看如何导入表"></a>现在我们来看如何导入表</h1><ul>
+<li><h2 id="步骤1-创建表结构"><a href="#步骤1-创建表结构" class="headerlink" title="步骤1 创建表结构"></a>步骤1 创建表结构</h2><p>通过BULK方式导入数据，首先需要数据库里有该表的空的表结构。<br>这时可以通过create table语句创建，也可以用Excel文件复制个表头，手动导入表结构。</p>
+</li>
+<li><h2 id="步骤2-执行代码"><a href="#步骤2-执行代码" class="headerlink" title="步骤2 执行代码"></a>步骤2 执行代码</h2><h3 id="CSV"><a href="#CSV" class="headerlink" title="CSV"></a>CSV</h3><h4 id="导入单个csv"><a href="#导入单个csv" class="headerlink" title="导入单个csv"></a>导入单个csv</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> @bulk_cmd <span class="keyword">nvarchar</span>(<span class="number">1000</span>)</span><br><span class="line"><span class="keyword">SET</span> @bulk_cmd = <span class="string">'BULK INSERT [DatabaseName].[dbo].[table] '</span> +</span><br><span class="line"><span class="string">'FROM '</span>+<span class="string">'''C:\data.csv'''</span>+<span class="string">'WITH (FIELDTERMINATOR = '','',CODEPAGE=''936'',FIRSTROW=1,ROWTERMINATOR = '''</span>+<span class="built_in">char</span>(<span class="number">10</span>)+<span class="string">''')'</span></span><br><span class="line">EXEC(@bulk_cmd)</span><br><span class="line"><span class="keyword">go</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="循环导入多个csv"><a href="#循环导入多个csv" class="headerlink" title="循环导入多个csv"></a>循环导入多个csv</h4><p><strong>循环导入的逻辑是把CSV文件的文件名改成 data(1).csv,data(2).csv…data(18).csv的形式，放入循环中，循环执行上面的单个csv文件导入的命令。</strong></p>
+<blockquote>
+<p><strong><a href="https://www.jianshu.com/p/c2f1087bdbce" target="_blank" rel="noopener">点击该链接查看如何 批量修改文件名</a></strong></p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">declare</span> @n <span class="built_in">int</span>,@filename <span class="built_in">varchar</span>(<span class="number">255</span>),@<span class="keyword">sql</span> <span class="built_in">varchar</span>(<span class="number">1000</span>)</span><br><span class="line"><span class="keyword">set</span> @n=<span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> @n&lt;=<span class="number">18</span></span><br><span class="line"><span class="keyword">begin</span> </span><br><span class="line"><span class="keyword">set</span> @filename=<span class="string">'data('</span>+<span class="keyword">ltrim</span>(<span class="keyword">rtrim</span>(<span class="keyword">str</span>(@n)))+<span class="string">').csv'</span></span><br><span class="line">print @filename</span><br><span class="line"><span class="keyword">set</span> @<span class="keyword">sql</span>=<span class="string">'bulk insert [DatabaseName].[dbo].[table]  from ''C:\'+@filename+'''</span> </span><br><span class="line">		<span class="keyword">with</span> (FIRSTROW =<span class="number">1</span>,CODEPAGE=<span class="string">''</span><span class="number">936</span><span class="string">''</span>,FIELDTERMINATOR = <span class="string">''</span>,<span class="string">''</span>,ROWTERMINATOR = <span class="string">'''+CHAR(10)+'''</span>)<span class="string">'</span></span><br><span class="line"><span class="string">print @sql</span></span><br><span class="line"><span class="string">exec(@sql)</span></span><br><span class="line"><span class="string">set @n=@n+1</span></span><br><span class="line"><span class="string">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="TXT"><a href="#TXT" class="headerlink" title="TXT"></a>TXT</h3><h4 id="导入单个txt"><a href="#导入单个txt" class="headerlink" title="导入单个txt"></a>导入单个txt</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">truncate</span> <span class="keyword">table</span> [dbo].[PINGZHENG201702]</span><br><span class="line"><span class="keyword">DECLARE</span> @bulk_cmd <span class="keyword">nvarchar</span>(<span class="number">1000</span>)</span><br><span class="line"><span class="keyword">SET</span> @bulk_cmd = <span class="string">'BULK INSERT [DatabaseName].[dbo].[table] '</span> +</span><br><span class="line"><span class="string">'FROM '</span>+<span class="string">'''C:\文件名.txt'''</span>+<span class="string">'WITH (FIELDTERMINATOR = '','',CODEPAGE=''936'',FIRSTROW=1,ROWTERMINATOR = '''</span>+<span class="built_in">char</span>(<span class="number">10</span>)+<span class="string">''')'</span></span><br><span class="line">EXEC(@bulk_cmd)</span><br><span class="line"><span class="keyword">go</span></span><br></pre></td></tr></table></figure>
+<h4 id="循环导入多个txt"><a href="#循环导入多个txt" class="headerlink" title="循环导入多个txt"></a>循环导入多个txt</h4><p><strong>循环导入的逻辑是把TXT文件的文件名改成 data(1).txt,data(2).txt…data(18).txt的形式，放入循环中，循环执行上面的单个txt文件导入的命令。</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">declare</span> @n <span class="built_in">int</span>,@filename <span class="built_in">varchar</span>(<span class="number">255</span>),@<span class="keyword">sql</span> <span class="built_in">varchar</span>(<span class="number">1000</span>)</span><br><span class="line"><span class="keyword">set</span> @n=<span class="number">10</span></span><br><span class="line"><span class="keyword">while</span> @n&lt;=<span class="number">12</span></span><br><span class="line"><span class="keyword">begin</span> </span><br><span class="line"><span class="keyword">set</span> @filename=<span class="string">'data('</span>+<span class="keyword">ltrim</span>(<span class="keyword">rtrim</span>(<span class="keyword">str</span>(@n)))+<span class="string">').txt'</span></span><br><span class="line">print @filename</span><br><span class="line"><span class="keyword">set</span> @<span class="keyword">sql</span>=<span class="string">'bulk insert [DatabaseName].[dbo].[table]  from ''C:\'+@filename+'''</span> </span><br><span class="line">		<span class="keyword">with</span> (FIRSTROW =<span class="number">1</span>,CODEPAGE=<span class="string">''</span><span class="number">936</span><span class="string">''</span>,FIELDTERMINATOR = <span class="string">''</span>|<span class="string">''</span>,ROWTERMINATOR=<span class="string">''</span><span class="number">0x0A</span><span class="string">''</span>)<span class="string">'</span></span><br><span class="line"><span class="string">print @sql</span></span><br><span class="line"><span class="string">exec(@sql)</span></span><br><span class="line"><span class="string">set @n=@n+1</span></span><br><span class="line"><span class="string">end</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
+  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>心中有阳光，脚下有力量
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2018/12/26/Sqlserver之同时导入多个txt-csv文件/" target="_blank" title="Sqlserver之同时导入多个txt&amp;csv文件">http://blog.ineazy.com/2018/12/26/Sqlserver之同时导入多个txt-csv文件/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+</div></div>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/12/25/How-To-Use-Markdown/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">How To Use Markdown</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BULK语句基础"><span class="nav-number">1.</span> <span class="nav-text">BULK语句基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#现在我们来看如何导入表"><span class="nav-number">2.</span> <span class="nav-text">现在我们来看如何导入表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤1-创建表结构"><span class="nav-number">2.1.</span> <span class="nav-text">步骤1 创建表结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤2-执行代码"><span class="nav-number">2.2.</span> <span class="nav-text">步骤2 执行代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSV"><span class="nav-number">2.2.1.</span> <span class="nav-text">CSV</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#导入单个csv"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">导入单个csv</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#循环导入多个csv"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">循环导入多个csv</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TXT"><span class="nav-number">2.2.2.</span> <span class="nav-text">TXT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#导入单个txt"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">导入单个txt</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#循环导入多个txt"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">循环导入多个txt</span></a></li></ol></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2018 Ineazy All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Ineazy
+          </div>
+          <div class="panel-body">
+            Copyright © 2018 心中有阳光，脚下有力量 All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+  {% if theme.canvas_nest %}
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  {% endif %}
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":90,"height":180},"mobile":{"show":false}});</script></body>
+</html>
