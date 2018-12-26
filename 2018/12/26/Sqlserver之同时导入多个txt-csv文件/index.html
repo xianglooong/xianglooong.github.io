@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="Ineazy">
 <meta property="og:description" content="BULK语句基础BULK有很多参数，但是常用的只有几个，下面简单介绍一下1234567bulk insert [DatabaseName].[dbo].[table] from &apos;C:\data.txt&apos;   with(      FIRSTROW =1, --指定要加载的第一行的行号。默认值是指定数据文件中的第一行      CODEPAGE=&apos;&apos;936&apos;&apos;, --数据库中的编码类型   FIE">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-26T14:47:00.730Z">
+<meta property="og:updated_time" content="2018-12-26T14:52:59.192Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sqlserver之同时导入多个txt&amp;csv文件">
 <meta name="twitter:description" content="BULK语句基础BULK有很多参数，但是常用的只有几个，下面简单介绍一下1234567bulk insert [DatabaseName].[dbo].[table] from &apos;C:\data.txt&apos;   with(      FIRSTROW =1, --指定要加载的第一行的行号。默认值是指定数据文件中的第一行      CODEPAGE=&apos;&apos;936&apos;&apos;, --数据库中的编码类型   FIE">
@@ -271,7 +271,7 @@
 <p><strong><a href="https://docs.microsoft.com/zh-cn/sql/t-sql/statements/bulk-insert-transact-sql?view=sql-server-2017" target="_blank" rel="noopener">更多细节点击链接查看微软官方文档</a></strong></p>
 </blockquote>
 <h1 id="现在我们来看如何导入表"><a href="#现在我们来看如何导入表" class="headerlink" title="现在我们来看如何导入表"></a>现在我们来看如何导入表</h1><ul>
-<li><h2 id="步骤1-创建表结构"><a href="#步骤1-创建表结构" class="headerlink" title="步骤1 创建表结构"></a>步骤1 创建表结构</h2><p>通过BULK方式导入数据，首先需要数据库里有该表的空的表结构。<br>这时可以通过create table语句创建，也可以用Excel文件复制个表头，手动导入表结构。</p>
+<li><h2 id="步骤1-创建表结构"><a href="#步骤1-创建表结构" class="headerlink" title="步骤1 创建表结构"></a>步骤1 创建表结构</h2><p>通过BULK方式导入数据，首先需要数据库里有该表的空的表结构。<br>这时可以通过create table语句创建，也可以用Excel文件复制个表头，手动导入表结构。<br><strong>比如说创建好表结构的空表为：[dbo].[table]</strong></p>
 </li>
 <li><h2 id="步骤2-执行代码"><a href="#步骤2-执行代码" class="headerlink" title="步骤2 执行代码"></a>步骤2 执行代码</h2><h3 id="CSV"><a href="#CSV" class="headerlink" title="CSV"></a>CSV</h3><h4 id="导入单个csv"><a href="#导入单个csv" class="headerlink" title="导入单个csv"></a>导入单个csv</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> @bulk_cmd <span class="keyword">nvarchar</span>(<span class="number">1000</span>)</span><br><span class="line"><span class="keyword">SET</span> @bulk_cmd = <span class="string">'BULK INSERT [DatabaseName].[dbo].[table] '</span> +</span><br><span class="line"><span class="string">'FROM '</span>+<span class="string">'''C:\data.csv'''</span>+<span class="string">'WITH (FIELDTERMINATOR = '','',CODEPAGE=''936'',FIRSTROW=1,ROWTERMINATOR = '''</span>+<span class="built_in">char</span>(<span class="number">10</span>)+<span class="string">''')'</span></span><br><span class="line">EXEC(@bulk_cmd)</span><br><span class="line"><span class="keyword">go</span></span><br></pre></td></tr></table></figure>
 </li>
